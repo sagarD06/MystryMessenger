@@ -85,6 +85,9 @@ export async function POST(request: Request) {
         { success: false, message: emailResponse.message },
         { status: 500 }
       );
+    }else{
+      console.log(emailResponse);
+      
     }
 
     return Response.json(
