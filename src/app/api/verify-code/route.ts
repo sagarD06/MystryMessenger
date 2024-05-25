@@ -12,7 +12,7 @@ const verifyCodeQuerySchema = z.object({
 export async function POST(request: Request) {
   dbConnect();
   try {
-    const { username, token } = await request.json();
+    const { username, code } = await request.json();
     // const result = verifyCodeQuerySchema.safeParse(token);
     // console.log(result)
     // if (!result.success) {
@@ -37,8 +37,9 @@ export async function POST(request: Request) {
         { status: 404 }
       );
     }
-
-    const isTokenCorrect = user.verifyToken === token;
+console.log("token from request",code)
+console.log("token from db",user.verifyToken)
+    const isTokenCorrect = user.verifyToken === code;
     const isTokenValid = new Date(user.verifyTokenExpiry) > new Date();
 
     if (isTokenCorrect && isTokenValid) {
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
       await user.save();
 
       return Response.json(
-        { success: false, message: "Code verified successfully!" },
+        { success: true, message: "Code verified successfully!" },
         { status: 201 }
       );
     } else if (!isTokenValid) {
