@@ -16,12 +16,12 @@ export async function POST(request: Request) {
       { status: 401 }
     );
   }
-  const { acceptMessage } = await request.json();
+  const { acceptMessages } = await request.json();
   try {
     const updatedUser = await UserModel.findByIdAndUpdate(
       user._id,
       {
-        isAcceptingMessage: acceptMessage,
+        isAcceptingMessage: acceptMessages,
       },
       { new: true }
     );
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     }
 
     return Response.json(
-      { success: true, message: "Acceptance message updated successfuly!" },
+      { success: true, data: updatedUser , message: "Acceptance message updated successfuly!" },
       { status: 200 }
     );
   } catch (error) {
@@ -71,7 +71,7 @@ export async function GET(request: Request) {
     return Response.json(
       {
         success: true,
-        isAcceptMessage: foundUser.isAcceptingMessage,
+        isAcceptingMessage: foundUser.isAcceptingMessage,
         message: "Accept messages fetched succesfully!",
       },
       { status: 200 }

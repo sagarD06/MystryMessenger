@@ -10,17 +10,17 @@ export const authOptions: NextAuthOptions = {
       id: "credentials",
       name: "Credentials",
       credentials: {
-        identifier : { label: "Email/Username", type: "text", placeholder: "" },
+        identifier: { label: "Email/Username", type: "text", placeholder: "" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any): Promise<any> {
         await dbConnect();
         try {
-          console.log(credentials)
+          console.log(credentials);
           const user = await UserModel.findOne({
             $or: [
               { email: credentials?.identifier },
-              { password: credentials?.password },
+              { username: credentials.identifier },
             ],
           });
           if (!user) {
@@ -50,12 +50,12 @@ export const authOptions: NextAuthOptions = {
         token._id = user._id?.toString();
         token.isVerified = user.isVerified;
         token.isAcceptingMessage = user.isAcceptingMessage;
-        token.usernames = user.username;
+        token.username = user.username;
       }
       return token;
     },
     async session({ session, token }) {
-      if(token){
+      if (token) {
         session.user._id = token._id as string;
         session.user.isVerified = token.isVerified as boolean;
         session.user.isAcceptingMessage = token.isAcceptingMessage as boolean;

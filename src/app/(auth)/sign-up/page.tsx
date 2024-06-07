@@ -97,7 +97,7 @@ function page() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <BackgroundBeams />
+      <BackgroundBeams className="bg-gray-900" />
       <div className="w-full max-w-md p-7 space-y-7 bg-white rounded-lg shadow-md z-20">
         <div className="text-center">
           <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl mb-6">
@@ -166,7 +166,7 @@ function page() {
               />
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-orange-400 hover:bg-orange-600"
                 disabled={isSubmittingForm}
               >
                 {isSubmittingForm ? (

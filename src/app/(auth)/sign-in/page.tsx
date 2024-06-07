@@ -67,7 +67,7 @@ const page = () => {
   };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <BackgroundBeams />
+      <BackgroundBeams className="bg-gray-900" />
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md z-20">
         <div className="text-center">
           <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl mb-6">
@@ -105,7 +105,7 @@ const page = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" disabled={isSigningIn}>
+            <Button type="submit" className="w-full bg-orange-400 hover:bg-orange-600" disabled={isSigningIn}>
               {isSigningIn ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Logging in..
